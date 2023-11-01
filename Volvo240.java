@@ -65,4 +65,6 @@ public class Volvo240{
     public void brake(double amount){
         decrementSpeed(amount);
     }
+
+    //HEj
 }
