@@ -76,6 +76,9 @@ public abstract class Car implements Movable{
 
     @Override
     public void move() {
-
+    this.xCord = xCord + currentSpeed;
+    this.xCord = xCord - currentSpeed;
+    this.yCord = yCord + currentSpeed;
+    this.yCord = yCord - currentSpeed;
     }
 }
