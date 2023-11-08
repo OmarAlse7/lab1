@@ -12,8 +12,21 @@ public class CarTest {
         Saab.move();
         assertEquals(0, Saab.getxCord());
         assertEquals(0.1, Saab.getyCord());
+        Saab.turnRight();
+        Saab.move();
+        assertEquals(0.1, Saab.getxCord());
+        assertEquals(0.1,Saab.getyCord());
+        Saab.turnRight();
+        Saab.turnRight();
+        Saab.move();
+        assertEquals(0, Saab.getxCord());
+        assertEquals(0.1,Saab.getyCord());
     }
-
+    @Test
+    void nr_doorsSaab() {
+        Saab95 saab = new Saab95();
+        assertEquals(2, saab.getNrDoors());
+    }
     @Test
     public void testMoveVolvo() {
         Car Volvo = new Volvo240();
@@ -27,26 +40,26 @@ public class CarTest {
     public void testTurnRightSaab() {
         Car Saab = new Saab95();
         Saab.turnRight();
-        assertEquals(1, Saab.getCurrentDir());
+        assertEquals(Car.direction.E, Saab.getCurrentDir());
     }
     @Test
     public void testTurnRightVolvo() {
         Car Volvo240 = new Volvo240();
         Volvo240.turnRight();
-        assertEquals(1, Volvo240.getCurrentDir());
+        assertEquals(Car.direction.E, Volvo240.getCurrentDir());
     }
 
     @Test
     public void testTurnLeftSaab() {
         Car Saab = new Saab95();
         Saab.turnLeft();
-        assertEquals(3, Saab.getCurrentDir());
+        assertEquals(Car.direction.W, Saab.getCurrentDir());
     }
     @Test
     public void testTurnLeftVolvo() {
         Car Volvo240 = new Volvo240();
         Volvo240.turnLeft();
-        assertEquals(3, Volvo240.getCurrentDir());
+        assertEquals(Car.direction.W, Volvo240.getCurrentDir());
     }
 
     @Test
@@ -56,7 +69,7 @@ public class CarTest {
         Saab.turnRight();
         Saab.turnRight();
         Saab.turnRight();
-        assertEquals(0, Saab.getCurrentDir());
+        assertEquals(Car.direction.N, Saab.getCurrentDir());
     }
     @Test
     public void testTurningVolvo() {
@@ -65,9 +78,35 @@ public class CarTest {
         Volvo240.turnRight();
         Volvo240.turnRight();
         Volvo240.turnRight();
-        assertEquals(0, Volvo240.getCurrentDir());
+        assertEquals(Car.direction.N, Volvo240.getCurrentDir());
     }
-
+    @Test
+    public void testTurningS() {
+        Car Saab = new Saab95();
+        Saab.turnRight();
+        Saab.turnLeft();
+        Saab.turnRight();
+        Saab.turnRight();
+        assertEquals(Car.direction.S, Saab.getCurrentDir());
+    }
+    @Test
+    public void testTurningW() {
+        Car Saab = new Saab95();
+        Saab.turnLeft();
+        Saab.turnLeft();
+        Saab.turnLeft();
+        Saab.turnRight();
+        Saab.turnRight();
+        assertEquals(Car.direction.W, Saab.getCurrentDir());
+    }
+    @Test
+    public void testTurning() {
+        Car Saab = new Saab95();
+        Saab.turnLeft();
+        Saab.turnLeft();
+        Saab.turnLeft();
+        assertEquals(Car.direction.E, Saab.getCurrentDir());
+    }
 
     @Test
     public void testingMoveAndTurnVolvo() {
@@ -77,7 +116,7 @@ public class CarTest {
         Volvo.startEngine();
         Volvo.incrementSpeed(1);
         Volvo.move();
-        assertEquals(0, Volvo.getxCord());
+        assertEquals(0.0, Volvo.getxCord());
     }
     @Test
     public void testIncrementSpeedSaab() {
@@ -86,7 +125,7 @@ public class CarTest {
         Saab.gas(0.4);
         Saab.incrementSpeed(1);
         Saab.move();
-        assertEquals(0, Saab.getxCord());
+        assertEquals(0.0, Saab.getxCord());
     }
     @Test
     public void testIncrementSpeedVolvo() {
@@ -95,7 +134,7 @@ public class CarTest {
         Volvo.gas(0.4);
         Volvo.incrementSpeed(1);
         Volvo.move();
-        assertEquals(0, Volvo.getxCord());
+        assertEquals(0.0, Volvo.getxCord());
     }
     @Test
     public void testDecrementSpeedSaab(){
