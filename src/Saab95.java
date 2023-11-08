@@ -5,9 +5,8 @@ public class Saab95 extends Car {
     private static boolean turboOn;
 
     public Saab95(){
-        super(2, 125,Color.red, "Saab95",
-                0, 0);
-	    turboOn = false;
+        super(2, 125,Color.red, "Saab95");        // Constructor Special method used to initialize objects
+	    turboOn = false;                            // Called when an object of a class is created
         stopEngine();
     }
 

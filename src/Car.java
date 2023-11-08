@@ -1,26 +1,23 @@
 import java.awt.*;
 
 public abstract class Car implements Movable {
-    private final int nrDoors; // Number of doors on the car
-    private final double enginePower; // Engine power of the car
-    private double currentSpeed; // The current speed of the car
-    private Color color; // Color of the car
-    public String modelName; // The car model name
+    private final int nrDoors;
+    private final double enginePower;
+    private double currentSpeed;
+    private Color color;
+    private final String modelName;
     private double xCord;
     private double yCord;
-    private direction currentDir = direction.N;
+    private direction currentDir = direction.N; // Variable
 
-    public Car(int nrDoors, double enginePower, Color color, String modelName,
-               double xCoordinate, double yCoordinate) {
-        this.nrDoors = nrDoors;
-        this.enginePower = enginePower;
+    public Car(int nrDoors, double enginePower, Color color, String modelName) {
+        this.nrDoors = nrDoors;                           // Car Constructor. Special method used to initialize objects
+        this.enginePower = enginePower;                   // Called when an object of a class is created
         this.color = color;
         this.modelName = modelName;
-        this.xCord = xCoordinate;
-        this.yCord = yCoordinate;
     }
 
-    public enum direction {
+    public enum direction {  //Special class, represents a group of constants
         N, E, S, W
     }
 
@@ -79,13 +76,11 @@ public abstract class Car implements Movable {
 
     protected abstract double speedFactor();
 
-    // TODO fix this method according to lab pm
     public void gas(double amount) {
         if (amount <= 1 & amount >= 0)
             incrementSpeed(amount);
     }
 
-    // TODO fix this method according to lab pm
     public void brake(double amount) {
         if (amount <= 1 & amount >= 0)
             decrementSpeed(amount);

@@ -25,16 +25,14 @@ public class Saab95Test {
     void SpeedFactorWithNoTurbo () {
         Saab95 saab = new Saab95();
         saab.setTurboOff();
+        saab.gas(0.4);
         assertEquals(1.25, saab.speedFactor());
     }
     @Test
     void SpeedFactorWithTurbo () {
         Saab95 saab = new Saab95();
-        assertEquals(1.25, saab.speedFactor());
-    }
-    @Test
-    void TestConstructor(){
-        Saab95 c = new Saab95();
-        assertNotEquals(c, null);
+        saab.setTurboOn();
+        saab.gas(0.4);
+        assertEquals(1.625, saab.speedFactor());
     }
 }

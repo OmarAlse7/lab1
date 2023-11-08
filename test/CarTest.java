@@ -27,14 +27,6 @@ public class CarTest {
         Saab95 saab = new Saab95();
         assertEquals(2, saab.getNrDoors());
     }
-    @Test
-    public void testMoveVolvo() {
-        Car Volvo = new Volvo240();
-        Volvo.startEngine();
-        Volvo.move();
-        assertEquals(0, Volvo.getxCord());
-        assertEquals(0.1, Volvo.getyCord());
-    }
 
     @Test
     public void testTurnRightSaab() {
@@ -111,9 +103,9 @@ public class CarTest {
     @Test
     public void testingMoveAndTurnVolvo() {
         Car Volvo = new Volvo240();
-        Volvo.turnRight();
-        Volvo.turnRight();
         Volvo.startEngine();
+        Volvo.turnRight();
+        Volvo.turnRight();
         Volvo.incrementSpeed(1);
         Volvo.move();
         assertEquals(0.0, Volvo.getxCord());
@@ -132,16 +124,14 @@ public class CarTest {
         Car Volvo = new Volvo240();
         Volvo.startEngine();
         Volvo.gas(0.4);
-        Volvo.incrementSpeed(1);
         Volvo.move();
-        assertEquals(0.0, Volvo.getxCord());
+        assertEquals(0.6, Volvo.getCurrentSpeed());
     }
     @Test
     public void testDecrementSpeedSaab(){
         Car Saab = new Saab95();
         Saab.startEngine();
         Saab.gas(0.4);
-        Saab.incrementSpeed(1);
         Saab.move();
         Saab.brake(1);
         Saab.decrementSpeed(1.5);
@@ -152,7 +142,6 @@ public class CarTest {
         Car Volvo = new Volvo240();
         Volvo.startEngine();
         Volvo.gas(0.4);
-        Volvo.incrementSpeed(1);
         Volvo.move();
         Volvo.brake(1);
         Volvo.decrementSpeed(1.5);
@@ -189,8 +178,7 @@ public class CarTest {
         Car Saab = new Saab95();
         Saab.startEngine();
         Saab.gas(0.4);
-        Saab.incrementSpeed(1);
-        assertEquals(1.85, Saab.getCurrentSpeed());
+        assertEquals(0.6, Saab.getCurrentSpeed());
     }
     @Test
     public void GetEnginePowerSaab(){
@@ -213,5 +201,14 @@ public class CarTest {
         Car Volvo = new Volvo240();
         Volvo.stopEngine();
         assertEquals(0, Volvo.getCurrentSpeed());
+    }
+    @Test
+    public void GasingMultipleTimes(){
+        Car Volvo = new Volvo240();
+        Volvo.startEngine();
+        for(int i = 0; i < 150; i++){
+            Volvo.gas(1);
+        }
+        assertEquals(Volvo.getCurrentSpeed(), Volvo.getEnginePower());
     }
 }
