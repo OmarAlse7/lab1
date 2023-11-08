@@ -1,13 +1,25 @@
 import java.awt.*;
 
 public abstract class Car implements Movable{
-    private int nrDoors; // Number of doors on the car
-    private double enginePower; // Engine power of the car
+    private final int nrDoors; // Number of doors on the car
+    private final double enginePower; // Engine power of the car
     private double currentSpeed; // The current speed of the car
     private Color color; // Color of the car
-    private String modelName; // The car model name
+    public String modelName; // The car model name
     private double xCord;
     private double yCord;
+    private int currentDir;
+    private final String[] dir = {"NORTH", "EAST", "SOUTH", "WEST"};
+    public Car(int nrDoors, double enginePower, Color color, String modelName,
+               double xCoordinate, double yCoordinate, int direction) {
+        this.nrDoors = nrDoors;
+        this.enginePower = enginePower;
+        this.color = color;
+        this.modelName = modelName;
+        this.xCord = xCoordinate;
+        this.yCord = yCoordinate;
+        this.currentDir = direction;
+    }
 
     public int getNrDoors(){
         return nrDoors;
@@ -24,6 +36,10 @@ public abstract class Car implements Movable{
         return color;
     }
 
+    public String getModelName() {
+        return modelName;
+    }
+
     public double getxCord() {
         return xCord;
     }
@@ -31,9 +47,12 @@ public abstract class Car implements Movable{
     public double getyCord() {
         return yCord;
     }
+    public int getCurrentDir() {
+        return currentDir;
+    }
 
-    public void setColor(Color clr){
-        color = clr;
+    public void setColor(Color Clr){
+        color = Clr;
     }
 
     public void startEngine(){
@@ -43,13 +62,14 @@ public abstract class Car implements Movable{
     public void stopEngine(){
         currentSpeed = 0;
     }
+
     public void incrementSpeed(double amount){
-        currentSpeed = getCurrentSpeed() + speedFactor() * amount;
+        currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount, enginePower);
+    }
+    public void decrementSpeed(double amount){
+        currentSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount, 0);
     }
 
-    public void decrementSpeed(double amount){
-        currentSpeed = getCurrentSpeed() - speedFactor() * amount;
-    }
 
     protected abstract double speedFactor();
 
@@ -65,20 +85,23 @@ public abstract class Car implements Movable{
             decrementSpeed(amount);
     }
     @Override
-    public void turnLeft() {
-
+    public void move(){
+        switch (dir[currentDir]) {
+            case "NORTH" -> yCord += currentSpeed;
+            case "SOUTH" -> yCord -= currentSpeed;
+            case "EAST" -> xCord += currentSpeed;
+            case "WEST" -> xCord -= currentSpeed;
+        }
     }
+    @Override
+    public void turnLeft() {
+        this.currentDir--;
+        this.currentDir = Math.floorMod(currentDir, 4);
+        }
 
     @Override
     public void turnRight() {
-
-    }
-
-    @Override
-    public void move() {
-    this.xCord = xCord + currentSpeed;
-    this.xCord = xCord - currentSpeed;
-    this.yCord = yCord + currentSpeed;
-    this.yCord = yCord - currentSpeed;
+        this.currentDir++;
+        this.currentDir = Math.floorMod(currentDir, 4);
     }
 }
