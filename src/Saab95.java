@@ -2,7 +2,7 @@ import java.awt.*;
 
 public class Saab95 extends Car {
 
-    private static boolean turboOn;
+    private boolean turboOn;
 
     public Saab95(){
         super(2, 125,Color.red, "Saab95");        // Constructor Special method used to initialize objects
@@ -10,11 +10,11 @@ public class Saab95 extends Car {
         stopEngine();
     }
 
-    public static void setTurboOn(){
+    public void setTurboOn(){
 	    turboOn = true;
     }
 
-    public static void setTurboOff(){
+    public void setTurboOff(){
 	    turboOn = false;
     }
     
